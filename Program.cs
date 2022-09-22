@@ -22,16 +22,27 @@
 
     /// <summary>Gets a new instance of the board with the numbers 1-9 in place. </summary>
     /// <returns>A list of 9 strings representing each square.</returns>
+
     static List<string> GetNewBoard()
     {
+        List<string> board = new List<string>();
+
+        for (int i = 1; i <= 9; i++) {
+            board.Add(i.ToString());
+        }
         
+        return board;
     }
 
     /// <summary>Displays the board in a 3x3 grid.</summary>
     /// <param name="board">The board</param>
     static void DisplayBoard(List<string> board)
     {
-
+        Console.WriteLine($"{board[0]}|{board[1]}|{board[2]}");
+        Console.WriteLine($"-+-+-");
+        Console.WriteLine($"{board[3]}|{board[4]}|{board[5]}");
+        Console.WriteLine($"-+-+-");
+        Console.WriteLine($"{board[6]}|{board[7]}|{board[8]}");
     }
 
     /// <summary>
@@ -41,7 +52,7 @@
     /// <returns>True if the game is over</returns>
     static bool IsGameOver(List<string> board)
     {
-        return false;
+        return IsWinner(board, "x") || IsWinner(board, "o") || IsTie(board);
     }
 
     /// <summary>Determines if the provided player has a tic tac toe.</summary>
