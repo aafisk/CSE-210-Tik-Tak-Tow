@@ -27,7 +27,8 @@
     {
         List<string> board = new List<string>();
 
-        for (int i = 1; i <= 9; i++) {
+        for (int i = 1; i <= 9; i++) 
+        {
             board.Add(i.ToString());
         }
         
@@ -52,7 +53,14 @@
     /// <returns>True if the game is over</returns>
     static bool IsGameOver(List<string> board)
     {
-        return IsWinner(board, "x") || IsWinner(board, "o") || IsTie(board);
+        bool isGameOver = false;
+        
+        if(IsWinner(board, "x") || IsWinner(board, "o") || IsTie(board))
+        {
+            isGameOver = true;
+        }
+
+        return isGameOver;
     }
 
     /// <summary>Determines if the provided player has a tic tac toe.</summary>
@@ -135,7 +143,8 @@
     {
         Console.WriteLine($"{currentPlayer}'s turn to choose a square (1-9): ");
         string playerChoice = Console.ReadLine();
-        return Convert.ToInt32(playerChoice);
+        int choice = int.Parse(playerChoice);
+        return choice;
     }
 
     /// <summary>
@@ -147,6 +156,6 @@
     /// <param name="currentPlayer">The current player's sign (x or o)</param>
     static void MakeMove(List<string> board, int choice, string currentPlayer)
     {
-        board[choice] = currentPlayer;
+        board[choice - 1] = currentPlayer;
     }
 }
