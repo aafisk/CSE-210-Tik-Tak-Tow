@@ -3,12 +3,12 @@
     static void Main(string[] args)
     {
 
-        List<string> board = GetNewBoard();
+        Board board = new Board();
         string currentPlayer = "x";
 
         while (!IsGameOver(board))
         {
-            DisplayBoard(board);
+            board.print();
 
             int choice = GetMoveChoice(currentPlayer);
             MakeMove(board, choice, currentPlayer);
@@ -16,34 +16,8 @@
             currentPlayer = GetNextPlayer(currentPlayer);
         }
 
-        DisplayBoard(board);
+        board.print();
         Console.WriteLine("Good game. Thanks for playing!");
-    }
-
-    /// <summary>Gets a new instance of the board with the numbers 1-9 in place. </summary>
-    /// <returns>A list of 9 strings representing each square.</returns>
-
-    static List<string> GetNewBoard()
-    {
-        List<string> board = new List<string>();
-
-        for (int i = 1; i <= 9; i++) 
-        {
-            board.Add(i.ToString());
-        }
-        
-        return board;
-    }
-
-    /// <summary>Displays the board in a 3x3 grid.</summary>
-    /// <param name="board">The board</param>
-    static void DisplayBoard(List<string> board)
-    {
-        Console.WriteLine($"{board[0]}|{board[1]}|{board[2]}");
-        Console.WriteLine($"-+-+-");
-        Console.WriteLine($"{board[3]}|{board[4]}|{board[5]}");
-        Console.WriteLine($"-+-+-");
-        Console.WriteLine($"{board[6]}|{board[7]}|{board[8]}");
     }
 
     /// <summary>
@@ -142,7 +116,7 @@
     static int GetMoveChoice(string currentPlayer)
     {
         Console.WriteLine($"{currentPlayer}'s turn to choose a square (1-9): ");
-        string playerChoice = Console.ReadLine();
+        string playerChoice = Console.ReadLine() ?? "";
         int choice = int.Parse(playerChoice);
         return choice;
     }
